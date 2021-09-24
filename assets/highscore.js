@@ -1,7 +1,7 @@
 
 var backButtonEl = document.getElementById("goBack");
 var clearButtonEl = document.getElementById("clearHigh");
-var highScoreEl = document.getElementsByClassName("highScoreList");
+var highScoreEl = document.getElementById("highScoreList");
 
 
 function init() {
@@ -16,13 +16,15 @@ function init() {
         var scoreEl;
         var first;
         var number;
-        var highScore = {};
+        var highestScores = JSON.parse(localStorage.getItem('scores'));
+        
 
-        for (var i = 0; i< highScore.length; i++) {
+        for (var i = 0; i < highestScores.length; i++) {
             scoreEl = document.createElement('li');
-            first = highScore[i].highName;
-            number = highScore[i].highScore;
-            scoreEl.textContent(`${first} - ${number}`);
+            first = highestScores[i].highName;
+            number = highestScores[i].highScore;
+            scoreEl.textContent = `${first} - ${number}`;
+            highScoreEl.appendChild(scoreEl);
         }
     }
 }
@@ -38,9 +40,9 @@ clearButtonEl.addEventListener('click', function() {
         localStorage.removeItem('scores');
         highScoreEl.innerhtml = '';
 
-        for (var i = 0; i < highScore.length; i++) {
-            highScoreEl.textContent = '';
-        }
+        // for (var i = 0; i < highScore.length; i++) {
+        //     highScoreEl.textContent = '';
+        // }
     }
 
     var noScore = document.createElement('h1');
